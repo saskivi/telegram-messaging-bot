@@ -23,6 +23,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Finalize set-up
+
 Using a text editor in `telegram-messaging-bot.py` add the bot token you received from BotFather as the `BOT_TOKEN` variable.
 
 Start the bot.
@@ -38,5 +40,7 @@ Start the bot again
 ```
 python telegram-messaging-bot.py
 ```
+
+I suggest running the bot on a server in a terminal window for example using Tmux.
 
 Now everything should work. Test the bot by sending it a private message and replying to it from the group chat.
