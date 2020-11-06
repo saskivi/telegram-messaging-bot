@@ -8,7 +8,7 @@ The way it works is that a private message sent to the bot is anonymously forwar
 
 ### Setting up with BotFather
 
-* Set-up a bot using [BotFather](t.me/botfather) and receive a bot token.
+* Set-up a bot using [BotFather](https://t.me/botfather) and receive a bot token.
 * In BotFather set the privacy mode such that the bot has access to all messages by `/help -> /setprivacy -> Disable`.
 * Set-up a group chat and add your bot.
 
