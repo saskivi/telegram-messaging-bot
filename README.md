@@ -2,7 +2,7 @@
 
 This bot can be used to communicate between people and a group chat similarly to a share email box. 
 
-The way it works is that a message sent to the bot is anonymously forwarded to a group chat. If in the group chat someone replys to the forwarded message, the reply is forwarded back to the original sender, again anonymously.
+The way it works is that a private message sent to the bot is anonymously forwarded to a group chat. If in the group chat someone replys to the forwarded message, the reply is forwarded back to the original sender, again anonymously.
 
 ## Usage
 
@@ -23,7 +23,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Using a text editor in `telegram-messaging-bot.py` add your bot token you received from BotFather as the `BOT_TOKEN` variable.
+Using a text editor in `telegram-messaging-bot.py` add the bot token you received from BotFather as the `BOT_TOKEN` variable.
 
 Start the bot.
 ```
