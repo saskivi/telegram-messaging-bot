@@ -32,7 +32,7 @@ Start the bot.
 python telegram-messaging-bot.py
 ```
 
-Got to the groupchat and type `\whoami`. The bot should reply with your chat's ID.
+Got to the group chat and type `\whoami`. The bot should reply with your chat's ID.
 
 Edit `telegram-messagin-bot.py` again and add the received chat ID as `CHAT_ID` variable.
 
@@ -41,6 +41,6 @@ Start the bot again
 python telegram-messaging-bot.py
 ```
 
-I suggest running the bot on a server in a terminal window for example using Tmux.
+I recommend running the bot on a server in a terminal window for example using Tmux.
 
 Now everything should work. Test the bot by sending it a private message and replying to it from the group chat.
