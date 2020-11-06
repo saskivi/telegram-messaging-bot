@@ -34,12 +34,10 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 
-def start(bot, update):
+def start(update, context):
     """Send a message when the command /start is issued."""
 
-    update.message.reply_text("""Heippa! Kirjoita jotain niin se välittyy Kvantin toimitukselle. Viestit ovat täysin anonyymejä, mutta toimitus voi vastata viesteihisi botin välityksellä.
-
-    Hi! Write something and it will be forwarded to the editorial staff of Kvantti. The messages are completely anonymous but the people of Kvantti can reply to your messages through the bot.""")
+    update.message.reply_text("""Heippa! Kirjoita jotain niin se välittyy eteenpäin. Viestit ovat täysin anonyymejä, mutta vastaanottaja voi vastata viesteihisi botin välityksellä.""")
 
 
 def error(bot, update, error):
@@ -47,22 +45,14 @@ def error(bot, update, error):
 
     logger.warning('Update "%s" caused error "%s"', update, error)
 
-def help(bot, update):
-    start(bot, update)
+def help(update, context):
+    start(context.bot, update)
 
-def flush_messages(bot):
-    """Flushes the messages send to the bot during downtime so that the bot
-    does not start spamming when it gets online again."""
+def whoami(update, context):
+    """Displays chat's ID"""
 
-    updates = bot.get_updates()
-    while updates:
-        print("Flushing {} messages.".format(len(updates)))
-        time.sleep(1)
-        updates = bot.get_updates(updates[-1]["update_id"] + 1)
-
-def whoami(bot, update):
     id = update.effective_message.chat.id
-    bot.send_message(id, "The ID of this chat is: {}".format(id))
+    context.bot.send_message(id, "The ID of this chat is: {}".format(id))
 
 
 def robust_send_message(bot, msg, to, reply_id):
@@ -94,25 +84,26 @@ def robust_send_message(bot, msg, to, reply_id):
     return sent
 
 
-def send_from_private(bot, update):
+def send_from_private(update, context):
     """Forward a private message sent for the bot to the receiving chat anonymously."""
 
     msg = update.effective_message
 
-    sent_message = robust_send_message(bot, msg, CHAT_ID, None)
+    sent_message = robust_send_message(context.bot, msg, CHAT_ID, None)
     sent_messages[sent_message.message_id] = (msg.chat.id, msg.message_id)
 
 
-def reply(bot, update):
+def reply(update, context):
     """Forward reply from receiving chat back to the original sender."""
 
     id = update.effective_message.reply_to_message.message_id
     if id in sent_messages:
         org = sent_messages[id]
-        robust_send_message(bot, update.effective_message, org[0], org[1])
+        robust_send_message(context.bot, update.effective_message, org[0], org[1])
 
 
 def main():
+    """Main polling loop that contains all the callback handlers"""
 
     updater = Updater(token=BOT_TOKEN)
 
