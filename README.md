@@ -15,7 +15,7 @@ The way it works is that a private message sent to the bot is anonymously forwar
 ### Clone repo and install libraries
 
 ```
-git clone https://github.com/ari-viitala/telegram-messaging-bot.git
+git clone https://github.com/saskivi/telegram-messaging-bot.git
 cd telegram-messaging-bot
 
 virtualenv venv
@@ -25,19 +25,28 @@ pip install -r requirements.txt
 
 ### Finalize set-up
 
-Using a text editor in `telegram-messaging-bot.py` add the bot token you received from BotFather as the `BOT_TOKEN` variable.
-
-Start the bot.
+Save the bot token you received from BotFather as an environment variable and create a placeholder environment variable for the chat ID by opening `~/.profile` in a text editor and adding the following lines:
 ```
+export BOT_TOKEN="[the token you received from BotFather]"
+export CHAT_ID="0"
+```
+
+Update the environment variables and start the bot.
+```
+source ~/.profile
 python telegram-messaging-bot.py
 ```
 
 Got to the group chat and type `\whoami`. The bot should reply with your chat's ID.
 
-Edit `telegram-messagin-bot.py` again and add the received chat ID as `CHAT_ID` variable.
-
-Start the bot again
+Edit `~/.profile` again and replace the placeholder with the actual chat ID:
 ```
+export CHAT_ID="[ID received from the bot]"
+```
+
+Update the environment variables and start the bot again.
+```
+source ~/.profile
 python telegram-messaging-bot.py
 ```
 

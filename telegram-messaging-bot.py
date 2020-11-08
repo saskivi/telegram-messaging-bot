@@ -16,14 +16,14 @@ and be able to send messages.
 """
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import logging
+import logging, os
 
 #Change this to your bot's token given by Telegrams Botfather.
-BOT_TOKEN = ""
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 #Change this to your chat where you want you messages to be forwarded.
 #To figure out the id, use for example the /whoami command of this bot in the chat.
-CHAT_ID = 0
+CHAT_ID = os.environ.get("CHAT_ID")
 
 #Sent messages are saved here to enable replying.
 sent_messages = {}
