@@ -19,11 +19,11 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging, os
 
 #Change this to your bot's token given by Telegrams Botfather.
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
+BOT_TOKEN = os.environ.get("TUOTTAJABOT_TOKEN")
 
 #Change this to your chat where you want you messages to be forwarded.
 #To figure out the id, use for example the /whoami command of this bot in the chat.
-CHAT_ID = os.environ.get("CHAT_ID")
+CHAT_ID = os.environ.get("TUOTTAJACHAT_ID")
 
 #Sent messages are saved here to enable replying.
 sent_messages = {}
@@ -37,7 +37,14 @@ logger = logging.getLogger(__name__)
 def start(update, context):
     """Send a message when the command /start is issued."""
 
-    update.message.reply_text("""Heippa! Kirjoita jotain niin se välittyy eteenpäin. Viestit ovat täysin anonyymejä, mutta vastaanottaja voi vastata viesteihisi botin välityksellä.""")
+    update.message.reply_text("""
+Botille lähetetyt viestit välitettään anonyymisti Fyysikkospeksin tuottajille. Tarkemmat ohjeet saat kirjoittamalla /help
+
+Tuottajiin voi toki olla yhteydessä myös kahden kesken
+Tuuli Aaltonen @lohenscowl
+Saskia Kivistö @saskivi
+Ville Tuominen @vilet
+    """)
 
 
 def error(bot, update, error):
@@ -46,7 +53,19 @@ def error(bot, update, error):
     logger.warning('Update "%s" caused error "%s"', update, error)
 
 def help(update, context):
-    start(context.bot, update)
+    """Send a message when the command /help is issued."""
+    update.message.reply_text("""
+Tuottajabotille lähetetyt yksityisviestit välitetään Fyysikkospeksin tuottajille. Viestit ovat automaattisesti anonyymejä ja tuetut viestimuodot ovat teksti, kuva, video, tarra, ympyrävideo, gif, tiedosto, sijainti ja ääni. Tuottajat voivat myös vastata botin kautta viesteihisi. Jos haluat, että tuottajat tietävät kuka olet, allekirjoita viestisi.
+
+Tuottajiin voi toki olla yhteydessä myös kahden kesken:
+Tuuli Aaltonen @lohenscowl
+Saskia Kivistö @saskivi
+Ville Tuominen @vilet
+
+Botin ylläpito: @saskivi
+Alkuperäinen toteutus: @Stippos
+Koodi: https://github.com/saskivi/telegram-messaging-bot
+    """, disable_web_page_preview=True)
 
 def whoami(update, context):
     """Displays chat's ID"""
@@ -111,6 +130,7 @@ def main():
 
     #Add handlers to the dispatchers. This defines what the bot does when it receives messages.
     dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("whoami", whoami))
 
     dp.add_handler(MessageHandler(Filters.private, send_from_private))
