@@ -81,7 +81,7 @@ Ville Tuominen @vilet
 
 Botin ylläpito: @saskivi
 Alkuperäinen toteutus: @Stippos
-Koodi: https://github.com/saskivi/telegram-messaging-bot
+Koodi: https://github.com/saskivi/telegram-messaging-bot/tree/tuottajabot
     """, disable_web_page_preview=True)
 
 
