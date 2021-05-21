@@ -33,6 +33,23 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
+#FIXME: Placeholder for proper calendar integration
+calendar = """ 
+22.5.           läpiluku
+9.-11.7.      kesäpäivät
+31.7.-1.8.   retriitti 1
+28.-29.8.    retriitti 2
+11.-12.9.    retriitti 3
+22.9.           teatteripäivä
+9.-10.10.    retriitti 4
+25.10.        kenraali
+26.10.        ensi-ilta
+27.10.        2. näytös
+28.10.        3. näytös
+29.10.        4. näytös
+21.11.        enkkunäytös
+"""
+
 
 def start(update, context):
     """Send a message when the command /start is issued."""
@@ -64,8 +81,19 @@ Ville Tuominen @vilet
 
 Botin ylläpito: @saskivi
 Alkuperäinen toteutus: @Stippos
-Koodi: https://github.com/saskivi/telegram-messaging-bot
+Koodi: https://github.com/saskivi/telegram-messaging-bot/tree/tuottajabot
     """, disable_web_page_preview=True)
+
+
+def calendar_all(update, context):
+    """FIXME: Send a message containing all events in the calendar"""
+    update.message.reply_text(f"Tulevat tapahtumat:{calendar}")
+
+
+def calendar_important(update, context):
+    """FIXME: Send a message containing only the most important events in the calendar"""
+    update.message.reply_text(f"Tärkeät tapahtumat:{calendar}")
+
 
 def whoami(update, context):
     """Displays chat's ID"""
@@ -132,6 +160,8 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("whoami", whoami))
+    dp.add_handler(CommandHandler("kalenteri", calendar_all))
+    dp.add_handler(CommandHandler("tarkeat", calendar_important))
 
     dp.add_handler(MessageHandler(Filters.private, send_from_private))
     dp.add_handler(MessageHandler(Filters.reply, reply))
